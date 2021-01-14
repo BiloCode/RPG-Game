@@ -9,19 +9,31 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "",
+"base": "Reference",
+"class": "BattleEntity",
+"language": "GDScript",
+"path": "res://scripts/BattleEntity.gd"
+}, {
+"base": "EditorVCSInterface",
 "class": "GitAPI",
 "language": "NativeScript",
 "path": "res://git_api.gdns"
+}, {
+"base": "Reference",
+"class": "Statistic",
+"language": "GDScript",
+"path": "res://scripts/Statistic.gd"
 } ]
 _global_script_class_icons={
-"GitAPI": ""
+"BattleEntity": "",
+"GitAPI": "",
+"Statistic": ""
 }
 
 [application]
 
 config/name="rpg_battle_1_vs_1"
-config/icon="res://icon.png"
+run/main_scene="res://Main.tscn"
 
 [display]
 
