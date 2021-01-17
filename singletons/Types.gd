@@ -10,6 +10,12 @@ enum state_battle {
 	LOSE_BATTLE
 }
 
+enum battle_zones {
+	PLAINS = 0,
+	CAVE = 1,
+	DUNGEON = 2
+}
+
 enum battle_command {
 	ATACK,
 	OBJECT,

@@ -2,13 +2,17 @@
   {
     "id" : 0,
     "name" : "slime",
+    "battle_zone" : 0,
+    "sprite" : "res://assets/sprites/monsters/slime.png",
     "stats" : {
+      "life" : 30,
       "atack" : 5,
       "defense" : 5,
       "speed" : 6
     },
     "treasures" : {
       "gold" : 10,
+      "exp" : 5,
       "weapons" : [],
       "items" : []
     }

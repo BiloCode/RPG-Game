@@ -1,6 +1,6 @@
 extends Control
 
-export(float, 0.05, 0.2) var letter_delay;
+export(float, 0.05, 0.1) var letter_delay;
 
 signal onTextBoxCreate;
 signal onTextBoxDestroy;
@@ -20,6 +20,7 @@ func _ready():
 	$CharacterName.text = character_name;
 	$Message.visible_characters = 0;
 	$Message.text = message[message_index];
+	$MessageTime.wait_time = letter_delay;
 	$MessageTime.start();
 	
 func _process(delta):

@@ -9,7 +9,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-letter_delay = 0.1
+letter_delay = 0.01
 
 [node name="Box" type="ColorRect" parent="."]
 margin_top = 372.0
