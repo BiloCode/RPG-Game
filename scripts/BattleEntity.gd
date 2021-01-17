@@ -3,14 +3,14 @@ extends Reference
 class_name BattleEntity
 
 var name : String;
-var sprite : String;
+var life : Statistic;
 var atack : Statistic;
 var defense : Statistic;
 var speed : Statistic;
 
-func _init(name : String, sprite : String, atack: int, defense: int, speed: int):
+func _init(name : String, life : int, atack: int, defense: int, speed: int):
 	self.name = name;
-	self.sprite = sprite;
+	self.life = Statistic.new(life);
 	self.atack = Statistic.new(atack);
 	self.defense = Statistic.new(defense);
 	self.speed = Statistic.new(speed);

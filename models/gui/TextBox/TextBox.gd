@@ -2,15 +2,21 @@ extends Control
 
 export(float, 0.05, 0.2) var letter_delay;
 
+signal onTextBoxCreate;
+signal onTextBoxDestroy;
+
 var message_index = 0;
-var character_name : String = "TheBilo16";
-var message : Array = [
-	"Hola que tal yo soy Billy",
-	"Me encantaria ser tu amigo",
-	"Por cierto, ¿te contaron lo que paso hace 1000 años con nuestros ancestros?"
-];
+var character_name : String = "";
+var message : Array = [];
+
+func _init():
+	emit_signal("onTextBoxCreate");
 
 func _ready():
+	if message.size() == 0:
+		queue_free();
+		return;
+	
 	$CharacterName.text = character_name;
 	$Message.visible_characters = 0;
 	$Message.text = message[message_index];
@@ -23,6 +29,7 @@ func _process(delta):
 			message_index += 1;
 			if message_index == message.size():
 				queue_free();
+				emit_signal("onTextBoxDestroy");
 				return;
 
 			$Message.visible_characters = 0;

@@ -1,0 +1,16 @@
+[
+  {
+    "id" : 0,
+    "name" : "slime",
+    "stats" : {
+      "atack" : 5,
+      "defense" : 5,
+      "speed" : 6
+    },
+    "treasures" : {
+      "gold" : 10,
+      "weapons" : [],
+      "items" : []
+    }
+  }
+]

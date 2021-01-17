@@ -1,0 +1,16 @@
+[
+  {
+    "id" : 0,
+    "durability" : 20,
+    "name" : "small sword",
+    "statistic" : "atack",
+    "amount" : 1
+  },
+  {
+    "id" : 1,
+    "durability" : 35,
+    "name" : "adventure sword",
+    "statistic" : "atack",
+    "amount" : 2
+  }
+]

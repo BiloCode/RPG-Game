@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://models/habilities/Piro/Piro.gd" type="Script" id=1]
+
+[sub_resource type="Curve" id=1]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, 145.636 ), 0.0, 0.0, 0, 0, Vector2( 0.990991, -103.091 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0.975 ), 0.0, 0.0, 0, 0, Vector2( 0.963964, 0.253409 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.517588, 1 )
+colors = PoolColorArray( 0.757813, 0, 0, 1, 0.324219, 0.226146, 0.11145, 0.501961, 1, 1, 1, 0 )
+
+[node name="Piro" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+amount = 64
+lifetime = 2.0
+speed_scale = 0.9
+emission_shape = 1
+emission_sphere_radius = 22.0
+gravity = Vector2( 0, -45 )
+initial_velocity_random = 0.2
+angle_curve = SubResource( 1 )
+scale_amount = 8.0
+scale_amount_curve = SubResource( 2 )
+color_ramp = SubResource( 3 )
+hue_variation_random = 0.77

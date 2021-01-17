@@ -1,5 +1,7 @@
 extends Reference
 
+class_name ReduceStatistic
+
 var stat : Statistic;
 
 func _init(stat : Statistic):
