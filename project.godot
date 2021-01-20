@@ -12,68 +12,86 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "BPLifeCheck",
 "language": "GDScript",
-"path": "res://scripts/BPLifeCheck.gd"
+"path": "res://scripts/Battle/BPLifeCheck.gd"
 }, {
 "base": "Resource",
 "class": "BPPerformActions",
 "language": "GDScript",
-"path": "res://scripts/BPPerformActions.gd"
+"path": "res://scripts/Battle/BPPerformActions.gd"
 }, {
 "base": "Resource",
 "class": "BPSpeedCheck",
 "language": "GDScript",
-"path": "res://scripts/BPSpeedCheck.gd"
+"path": "res://scripts/Battle/BPSpeedCheck.gd"
 }, {
 "base": "Reference",
 "class": "BattleEntity",
 "language": "GDScript",
-"path": "res://scripts/BattleEntity.gd"
+"path": "res://scripts/Battle/BattleEntity.gd"
+}, {
+"base": "Resource",
+"class": "GameUtility",
+"language": "GDScript",
+"path": "res://scripts/GameUtility.gd"
+}, {
+"base": "Reference",
+"class": "IncreaseStatistic",
+"language": "GDScript",
+"path": "res://scripts/Statistic/IncreaseStatistic.gd"
 }, {
 "base": "Resource",
 "class": "ItemsLoad",
 "language": "GDScript",
-"path": "res://scripts/ItemsLoad.gd"
+"path": "res://scripts/Loaders/ItemsLoad.gd"
 }, {
 "base": "Resource",
 "class": "MonsterLoad",
 "language": "GDScript",
-"path": "res://scripts/MonsterLoad.gd"
+"path": "res://scripts/Loaders/MonsterLoad.gd"
 }, {
 "base": "Reference",
 "class": "PlayerIsLive",
 "language": "GDScript",
-"path": "res://scripts/PlayerIsLive.gd"
+"path": "res://scripts/Battle/PlayerIsLive.gd"
 }, {
 "base": "Node",
 "class": "RandomEnemy",
 "language": "GDScript",
-"path": "res://scripts/RandomEnemy.gd"
+"path": "res://scripts/Battle/RandomEnemy.gd"
 }, {
 "base": "Reference",
 "class": "ReduceStatistic",
 "language": "GDScript",
-"path": "res://scripts/ReduceStatistic.gd"
+"path": "res://scripts/Statistic/ReduceStatistic.gd"
+}, {
+"base": "Resource",
+"class": "SkillsLoad",
+"language": "GDScript",
+"path": "res://scripts/Loaders/SkillsLoad.gd"
 }, {
 "base": "Reference",
 "class": "Statistic",
 "language": "GDScript",
-"path": "res://scripts/Statistic.gd"
+"path": "res://scripts/Statistic/Statistic.gd"
 }, {
 "base": "Resource",
 "class": "WeaponsLoad",
 "language": "GDScript",
-"path": "res://scripts/WeaponsLoad.gd"
+"path": "res://scripts/Loaders/WeaponsLoad.gd"
 } ]
 _global_script_class_icons={
 "BPLifeCheck": "",
 "BPPerformActions": "",
 "BPSpeedCheck": "",
 "BattleEntity": "",
+"GameUtility": "",
+"IncreaseStatistic": "",
 "ItemsLoad": "",
 "MonsterLoad": "",
 "PlayerIsLive": "",
 "RandomEnemy": "",
 "ReduceStatistic": "",
+"SkillsLoad": "",
 "Statistic": "",
 "WeaponsLoad": ""
 }
@@ -86,8 +104,9 @@ run/main_scene="res://Main.tscn"
 [autoload]
 
 Types="*res://singletons/Types.gd"
+GameData="*res://singletons/GameData.gd"
+MessageSystem="*res://singletons/MessageSystem.gd"
 PlayerStore="*res://singletons/PlayerStore.gd"
-NodeBattleEntity="*res://singletons/NodeBattleEntity.gd"
 
 [display]
 
@@ -107,7 +126,7 @@ ui_accept={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777222,"unicode":0,"echo":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"unicode":0,"echo":false,"script":null)
+, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 

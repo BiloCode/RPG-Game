@@ -1,6 +1,7 @@
 [
   {
     "id" : 0,
+    "type" : "item",
     "name" : "manzana",
     "effect" : {
       "type" : "life",
@@ -9,6 +10,7 @@
   },
   {
     "id" : 1,
+    "type" : "item",
     "name" : "hierba medicinal",
     "effect" : {
       "type" : "state"

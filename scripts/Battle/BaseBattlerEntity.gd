@@ -4,11 +4,12 @@ var AnimationController = preload("res://models/habilities/AnimationController.t
 
 var data : BattleEntity;
 var battle_target;
-var skill_selected : String;
 var is_perform_action = false;
 
+var skill_selected : Dictionary;
+var object_selected : Dictionary;
+
 signal onBattleEntityEndAction;
-signal onRunBattle(self_entity);
 signal onBattleEntityStartAction(self_entity);
 
 onready var playerIsLive = PlayerIsLive.new();
@@ -17,6 +18,7 @@ onready var playerIsLive = PlayerIsLive.new();
 func clearBattleData():
 	is_perform_action = true;
 	battle_target = null;
+	object_selected = {};
 	emit_signal("onBattleEntityEndAction");
 	
 func animationControllerCreate():
@@ -28,12 +30,21 @@ func animationControllerCreate():
 	
 # Signals function
 func _on_animation_controller_end_animation():
-	match skill_selected:
+	match skill_selected.name:
 		"atack":
 			var damage = (data.atack.current_value * 4) - (battle_target.data.defense.current_value * 2);
 			var reduceStatistic = ReduceStatistic.new(battle_target.data.life);
 			reduceStatistic.__invoke(damage);
+		
+		"defense":
+			pass;
+			
 		"object":
-			var new_life = 10;
+			if object_selected.effect.type == "life":
+				var increaseStatistic = IncreaseStatistic.new(data.life);
+				increaseStatistic.__invoke(object_selected.effect.amount);
+			
+			var object_store = PlayerStore.getObjectById(object_selected.id);
+			object_store.amount -= 1;
 
 	clearBattleData();

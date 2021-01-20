@@ -17,20 +17,20 @@ var battle_zone = Types.battle_zones.PLAINS;
 
 signal onBattleEnd;
 
-func _init():
+func _ready():
 	player = PlayerBattle.instance();
 	enemy = EnemyBattle.instance();
-
 	enemyInitData(enemy);
 	playerInitData(player);
-	
 	add_child(player);
 	add_child(enemy);
-
-func _ready():
+	
 	battle_state = Types.state_battle.LIFE_CHECK;
 	player.transform = $PlayerPosition.transform;
 	enemy.transform = $EnemyPosition.transform;
+	
+	$BattleLifeBarEnemy/LifePoints.text = str(enemy.data.life.current_value) + " / " + str(enemy.data.life.max_value);
+	$BattleLifeBarPlayer/LifePoints.text = str(player.data.life.current_value) + " / " + str(player.data.life.max_value);
 
 func _process(delta):
 	if text_box_exists or player_controls_active or entity_is_perform_action:
@@ -43,7 +43,7 @@ func _process(delta):
 			battle_state = battleLifeCheck.__invoke(player, enemy);
 
 		Types.state_battle.CONTROLS:
-			player.call("controlsActivate", enemy);
+			player.call("createControls", enemy);
 			enemy.call("targetSelection", player);
 			player_controls_active = true;
 			
@@ -69,7 +69,7 @@ func _process(delta):
 		Types.state_battle.WIN_BATTLE:
 			var text_box = textBoxCreate([
 				"Has ganado el combate",
-				"Has ganado " + str(enemy.gold) + " de oro y " + str(enemy.death_exp) + " exp"
+				"Has ganado " + str(enemy.gold) + " de oro"
 			]);
 			
 			yield(text_box, "onTextBoxDestroy");
@@ -81,7 +81,13 @@ func _process(delta):
 
 #Entities Init
 func playerInitData(player):
-	player.data = BattleEntity.new("player_test", 30,18,10,15);
+	player.data = BattleEntity.new(
+		PlayerStore.player_name, 
+		PlayerStore.stats.life,
+		PlayerStore.stats.atack,
+		PlayerStore.stats.defense,
+		PlayerStore.stats.speed
+	);
 	
 	player.connect("onBattleEntityStartAction", self, "_on_battle_entity_start_action");
 	player.connect("onBattleEntityEndAction", self, "_on_battle_entity_end_action");
@@ -90,12 +96,10 @@ func playerInitData(player):
 
 func enemyInitData(enemy):
 	var randomNumber = RandomNumberGenerator.new();
-	var monsterLoad = MonsterLoad.new();
-	var generateEnemy = RandomEnemy.new(randomNumber, monsterLoad);
-	var randomEnemy = generateEnemy.__invoke(battle_zone);
+	var generateEnemy = RandomEnemy.new(randomNumber);
+	var randomEnemy = generateEnemy.__invoke(battle_zone, GameData.monsters);
 	
 	enemy.sprite = randomEnemy.sprite;
-	enemy.death_exp = randomEnemy.treasures.exp;
 	enemy.weapons = randomEnemy.treasures.weapons;
 	enemy.gold = randomEnemy.treasures.gold;
 	enemy.items = randomEnemy.treasures.items;
@@ -112,14 +116,11 @@ func enemyInitData(enemy):
 
 #Utils
 func textBoxCreate(message : Array):
-	var text_box = TextBox.instance();
-	text_box.message = message;
-	add_child(text_box);
+	var node_message = MessageSystem.createTextBox("", message, self);
+	text_box_exists = true;
+	node_message.connect("onTextBoxDestroy", self, "_on_textbox_destroy");
 	
-	self.text_box_exists = true;
-	text_box.connect("onTextBoxDestroy", self, "_on_textbox_destroy");
-	
-	return text_box;
+	return node_message;
 
 #Signals Functions
 func _on_textbox_destroy():
@@ -127,8 +128,18 @@ func _on_textbox_destroy():
 
 func _on_battle_entity_start_action(self_entity):
 	entity_is_perform_action = true;
+	var skill_name = "";
+	
+	match(self_entity.skill_selected.name):
+		"atack":
+			skill_name = "ataque";
+		"object":
+			skill_name = self_entity.object_selected.name;
+		"defense":
+			skill_name = "defensa";
+	
 	var text_box = textBoxCreate([ 
-		 self_entity.data.name + " ha usado " + self_entity.skill_selected
+		 self_entity.data.name + " ha usado " + skill_name
 	]);
 
 func _on_battle_entity_end_action():
@@ -139,11 +150,8 @@ func _on_player_select_action():
 	battle_state = Types.state_battle.SPEED_CHECK;
 	player_controls_active = false;
 
-func _on_entity_run_battle(self_entity):
-	var text_box = textBoxCreate([ 
-		self_entity.data.name + " ha escapado del combate." 
-	]);
-	
+func _on_entity_run_battle():
+	var text_box = textBoxCreate([ player.data.name + " ha escapado del combate." ]);
 	yield(text_box, "onTextBoxDestroy");
 	emit_signal("onBattleEnd");
 	queue_free();

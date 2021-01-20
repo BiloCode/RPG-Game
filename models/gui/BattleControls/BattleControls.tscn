@@ -1,43 +1,44 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://models/gui/BattleControls/BattleControls.gd" type="Script" id=1]
+[ext_resource path="res://models/gui/BattleButton/BattleButton.tscn" type="PackedScene" id=2]
 
 [node name="BattleControls" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-object_button = 1
-run_button = 2
 
-[node name="AtackButton" type="Button" parent="."]
-margin_left = 56.0
-margin_top = 416.0
-margin_right = 168.0
-margin_bottom = 448.0
+[node name="Buttons" type="GridContainer" parent="."]
+margin_left = 8.0
+margin_top = 352.0
+margin_right = 472.0
+margin_bottom = 470.0
+custom_constants/vseparation = 6
+custom_constants/hseparation = 6
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Atack" parent="Buttons" instance=ExtResource( 2 )]
+margin_right = 229.0
 text = "Atacar"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="ObjectButton" type="Button" parent="."]
-margin_left = 184.0
-margin_top = 416.0
-margin_right = 296.0
-margin_bottom = 448.0
+[node name="Objects" parent="Buttons" instance=ExtResource( 2 )]
+margin_left = 235.0
+margin_right = 464.0
 text = "Objetos"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="RunButton" type="Button" parent="."]
-margin_left = 312.0
-margin_top = 416.0
-margin_right = 424.0
-margin_bottom = 448.0
+[node name="Defense" parent="Buttons" instance=ExtResource( 2 )]
+margin_top = 62.0
+margin_right = 229.0
+margin_bottom = 118.0
+text = "Defender"
+
+[node name="Run" parent="Buttons" instance=ExtResource( 2 )]
+margin_left = 235.0
+margin_top = 62.0
+margin_right = 464.0
+margin_bottom = 118.0
 text = "Huir"
-__meta__ = {
-"_edit_use_anchors_": false
-}

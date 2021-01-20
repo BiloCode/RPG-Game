@@ -1,14 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://animations/AnimationBattleHit.tres" type="Animation" id=1]
 [ext_resource path="res://models/characters/EnemyBattle/EnemyBattle.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/default.png" type="Texture" id=3]
+[ext_resource path="res://animations/AnimationBattlerDeath.tres" type="Animation" id=4]
 
 [node name="EnemyBattle" type="Node2D"]
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 anims/AnimationBattleHit = ExtResource( 1 )
+anims/AnimationBattlerDeath = ExtResource( 4 )

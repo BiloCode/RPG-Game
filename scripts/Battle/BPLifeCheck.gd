@@ -7,7 +7,7 @@ var playerIsLive : PlayerIsLive;
 func _init(playerIsLive : PlayerIsLive):
 	self.playerIsLive = playerIsLive;
 
-func __invoke(player : NodeBattleEntity, enemy : NodeBattleEntity):
+func __invoke(player, enemy):
 	var player_live = self.playerIsLive.__invoke(player.data.life);
 	var enemy_live = self.playerIsLive.__invoke(enemy.data.life);
 	

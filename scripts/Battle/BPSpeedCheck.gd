@@ -8,7 +8,7 @@ func _init(RanNumber : RandomNumberGenerator):
 	RanNumber.randomize();
 	self.RanNumber = RanNumber;
 	
-func __invoke(player : NodeBattleEntity, enemy : NodeBattleEntity):
+func __invoke(player, enemy):
 	var perform_order = []
 	var player_speed = player.data.speed.current_value;
 	var enemy_speed = enemy.data.speed.current_value;

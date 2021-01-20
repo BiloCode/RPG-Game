@@ -1,6 +1,7 @@
 [
   {
     "id" : 0,
+    "type" : "weapon",
     "durability" : 20,
     "name" : "small sword",
     "statistic" : "atack",
@@ -8,6 +9,7 @@
   },
   {
     "id" : 1,
+    "type" : "weapon",
     "durability" : 35,
     "name" : "adventure sword",
     "statistic" : "atack",

@@ -5,7 +5,7 @@ signal onAnimationEnd;
 var Cure = preload("res://models/habilities/Cure/Cure.tscn");
 
 func playAnimation(parent, target):
-	match parent.skill_selected:
+	match parent.skill_selected.name:
 		"atack":
 			var target_node_animation = target.get_node("Animation");
 			target_node_animation.play("AnimationBattleHit");
@@ -17,6 +17,6 @@ func playAnimation(parent, target):
 			get_tree().root.add_child(animation_cure);
 			yield(animation_cure, "onParticleDestroy");
 	
-	yield(get_tree().create_timer(1), "timeout");
+	yield(get_tree().create_timer(0.5), "timeout");
 	emit_signal("onAnimationEnd");
 	queue_free();

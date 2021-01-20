@@ -1,5 +1,23 @@
 extends Node
 
+enum game_state {
+	START,
+	BATTLE,
+	PAUSE
+}
+
+enum movable_direction {
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN
+}
+
+enum state_machine {
+	IDDLE,
+	MOVE
+}
+
 enum state_battle {
 	LIFE_CHECK,
 	CONTROLS,
@@ -18,6 +36,7 @@ enum battle_zones {
 
 enum battle_command {
 	ATACK,
+	DEFENSE,
 	OBJECT,
 	RUN
 }
