@@ -33,10 +33,3 @@ enum battle_zones {
 	CAVE = 1,
 	DUNGEON = 2
 }
-
-enum battle_command {
-	ATACK,
-	DEFENSE,
-	OBJECT,
-	RUN
-}

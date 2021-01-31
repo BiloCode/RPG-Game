@@ -5,7 +5,7 @@
     "battle_zone" : 0,
     "sprite" : "res://assets/sprites/monsters/slime.png",
     "stats" : {
-      "life" : 150,
+      "life" : 50,
       "atack" : 5,
       "defense" : 5,
       "speed" : 6

@@ -1,15 +1,35 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://animations/AnimationBattleHit.tres" type="Animation" id=1]
 [ext_resource path="res://models/characters/PlayerBattle/PlayerBattle.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/default.png" type="Texture" id=3]
+[ext_resource path="res://animations/AnimationBattlerDefense.tres" type="Animation" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "MoveForHit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 6, 0 ), Vector2( 0, 0 ) ]
+}
 
 [node name="PlayerBattle" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 anims/AnimationBattleHit = ExtResource( 1 )
+anims/AnimationBattlerDefense = ExtResource( 4 )
+anims/MoveForHit = SubResource( 1 )
 [connection signal="animation_finished" from="Animation" to="." method="_on_AnimationPlayer_animation_finished"]

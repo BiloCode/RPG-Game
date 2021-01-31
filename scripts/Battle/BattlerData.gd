@@ -1,6 +1,6 @@
 extends Reference
 
-class_name BattleEntity
+class_name BattlerData
 
 var name : String;
 var life : Statistic;
@@ -11,6 +11,6 @@ var speed : Statistic;
 func _init(name : String, life : int, atack: int, defense: int, speed: int):
 	self.name = name;
 	self.life = Statistic.new(life);
-	self.atack = Statistic.new(atack);
-	self.defense = Statistic.new(defense);
-	self.speed = Statistic.new(speed);
+	self.atack = InmutableStatistic.new(atack);
+	self.defense = InmutableStatistic.new(defense);
+	self.speed = InmutableStatistic.new(speed);

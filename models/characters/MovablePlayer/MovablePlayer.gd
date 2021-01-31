@@ -8,11 +8,11 @@ var probability = 3;
 var velocity = Vector2(0,0);
 
 signal onStartBattle;
-
-func _process(delta):
-	if GameData.game_state != Types.game_state.START: 
-		return;
 	
+func _physics_process(delta):
+	if GameData.game_state != Types.game_state.START:
+		return;
+		
 	var key_left = Input.is_action_pressed("ui_left");
 	var key_right = Input.is_action_pressed("ui_right");
 	var key_up = Input.is_action_pressed("ui_up");

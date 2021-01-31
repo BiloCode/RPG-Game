@@ -7,6 +7,7 @@ margin_right = 240.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 0, 56 )
 focus_mode = 0
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme = ExtResource( 1 )
 enabled_focus_mode = 0

@@ -24,18 +24,18 @@ func _ready():
 	playerInitData(player);
 	add_child(player);
 	add_child(enemy);
-	
+
 	battle_state = Types.state_battle.LIFE_CHECK;
 	player.transform = $PlayerPosition.transform;
 	enemy.transform = $EnemyPosition.transform;
 	
-	$BattleLifeBarEnemy/LifePoints.text = str(enemy.data.life.current_value) + " / " + str(enemy.data.life.max_value);
-	$BattleLifeBarPlayer/LifePoints.text = str(player.data.life.current_value) + " / " + str(player.data.life.max_value);
-
 func _process(delta):
+	$BattleLifeBarEnemy.call("UpdateLifeBar", enemy.data.name, enemy.data.life.current_value, enemy.data.life.max_value, false);
+	$BattleLifeBarPlayer.call("UpdateLifeBar", player.data.name, player.data.life.current_value, player.data.life.max_value, true);
+	
 	if text_box_exists or player_controls_active or entity_is_perform_action:
 		return;
-	
+
 	match battle_state:
 		Types.state_battle.LIFE_CHECK:
 			var playerIsLive = PlayerIsLive.new();
@@ -43,13 +43,12 @@ func _process(delta):
 			battle_state = battleLifeCheck.__invoke(player, enemy);
 
 		Types.state_battle.CONTROLS:
-			player.call("createControls", enemy);
-			enemy.call("targetSelection", player);
+			player.call("create_controls", enemy);
+			enemy.call("target_selection", player);
 			player_controls_active = true;
 			
 		Types.state_battle.SPEED_CHECK:
-			var ranNumber = RandomNumberGenerator.new();
-			var speedCheck = BPSpeedCheck.new(ranNumber);
+			var speedCheck = BPSpeedCheck.new(GameData.Random);
 			entity_list = speedCheck.__invoke(player, enemy);
 			battle_state = Types.state_battle.PERFORM_ACTIONS;
 			
@@ -62,26 +61,21 @@ func _process(delta):
 		Types.state_battle.TURN_END:
 			entity_list = [];
 			current_index = 0;
-			player.is_perform_action = false;
-			enemy.is_perform_action = false;
+			enemy.normalize_data();
+			player.normalize_data();
 			battle_state = Types.state_battle.LIFE_CHECK;
 			
 		Types.state_battle.WIN_BATTLE:
-			var text_box = textBoxCreate([
-				"Has ganado el combate",
-				"Has ganado " + str(enemy.gold) + " de oro"
-			]);
-			
-			yield(text_box, "onTextBoxDestroy");
-			emit_signal("onBattleEnd");
-			queue_free();
+			print("win");
+			#emit_signal("onBattleEnd");
+			#queue_free();
 			
 		Types.state_battle.LOSE_BATTLE:
 			print("Lose");
 
 #Entities Init
 func playerInitData(player):
-	player.data = BattleEntity.new(
+	player.data = BattlerData.new(
 		PlayerStore.player_name, 
 		PlayerStore.stats.life,
 		PlayerStore.stats.atack,
@@ -95,15 +89,14 @@ func playerInitData(player):
 	player.connect("onRunBattle", self, "_on_entity_run_battle");
 
 func enemyInitData(enemy):
-	var randomNumber = RandomNumberGenerator.new();
-	var generateEnemy = RandomEnemy.new(randomNumber);
+	var generateEnemy = RandomEnemy.new(GameData.Random);
 	var randomEnemy = generateEnemy.__invoke(battle_zone, GameData.monsters);
 	
 	enemy.sprite = randomEnemy.sprite;
 	enemy.weapons = randomEnemy.treasures.weapons;
 	enemy.gold = randomEnemy.treasures.gold;
 	enemy.items = randomEnemy.treasures.items;
-	enemy.data = BattleEntity.new(
+	enemy.data = BattlerData.new(
 		randomEnemy.name,
 		randomEnemy.stats.life,
 		randomEnemy.stats.atack,
@@ -123,24 +116,8 @@ func textBoxCreate(message : Array):
 	return node_message;
 
 #Signals Functions
-func _on_textbox_destroy():
-	text_box_exists = false;
-
 func _on_battle_entity_start_action(self_entity):
 	entity_is_perform_action = true;
-	var skill_name = "";
-	
-	match(self_entity.skill_selected.name):
-		"atack":
-			skill_name = "ataque";
-		"object":
-			skill_name = self_entity.object_selected.name;
-		"defense":
-			skill_name = "defensa";
-	
-	var text_box = textBoxCreate([ 
-		 self_entity.data.name + " ha usado " + skill_name
-	]);
 
 func _on_battle_entity_end_action():
 	current_index += 1;
@@ -151,7 +128,4 @@ func _on_player_select_action():
 	player_controls_active = false;
 
 func _on_entity_run_battle():
-	var text_box = textBoxCreate([ player.data.name + " ha escapado del combate." ]);
-	yield(text_box, "onTextBoxDestroy");
-	emit_signal("onBattleEnd");
 	queue_free();

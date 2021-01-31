@@ -1,15 +1,33 @@
 extends Node2D
 
-signal onAnimationEnd;
+const Cure = preload("res://models/habilities/Cure/Cure.tscn");
 
-var Cure = preload("res://models/habilities/Cure/Cure.tscn");
+signal onActionAnimationEnd;
+signal onEntityAnimationEnd;
+
+func is_fail_skill(battler) -> bool:
+	var fail_skill = false;
+	var probaility_fail = (100 / battler.skill_selected.precision) - 1;
+	var probability = GameData.Random.randi_range(0, probaility_fail);
+	
+	return probability != 0;
 
 func playAnimation(parent, target):
+	var fail_skill = is_fail_skill(parent);
+	
 	match parent.skill_selected.name:
-		"atack":
-			var target_node_animation = target.get_node("Animation");
-			target_node_animation.play("AnimationBattleHit");
-			yield(target_node_animation, "animation_finished");
+		"atack", "tackle":
+			var AnimationParent = parent.get_node("Animation");
+			var AnimationTarget = target.get_node("Animation");
+			AnimationParent.play("MoveForHit");
+			if !fail_skill:
+				AnimationTarget.play("AnimationBattleHit");
+				yield(AnimationTarget, "animation_finished");
+				
+		"defense":
+			var AnimationParent = parent.get_node("Animation");
+			AnimationParent.play("AnimationBattlerDefense");
+			yield(AnimationParent, "animation_finished");
 			
 		"object":
 			var animation_cure = Cure.instance();
@@ -17,6 +35,9 @@ func playAnimation(parent, target):
 			get_tree().root.add_child(animation_cure);
 			yield(animation_cure, "onParticleDestroy");
 	
-	yield(get_tree().create_timer(0.5), "timeout");
-	emit_signal("onAnimationEnd");
+	if !fail_skill:
+		emit_signal("onEntityAnimationEnd");
+
+	yield(get_tree().create_timer(1), "timeout");
+	emit_signal("onActionAnimationEnd");
 	queue_free();

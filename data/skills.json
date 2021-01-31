@@ -2,22 +2,28 @@
   {
     "id" : 0,
     "name" : "atack",
-    "type" : "phisic"
+    "type" : "phisic",
+    "description" : "Golpea al enemigo con su fuerza fisica",
+    "precision" : 100
   },
   {
     "id" : 1,
-    "name" : "object",
-    "type" : "state"    
+    "name" : "defense",
+    "type" : "state",
+    "description" : "El usuario se protege doblando su defensa fisica.",
+    "precision" : 100
   },
-  
   {
     "id" : 2,
-    "name" : "defense",
-    "type" : "state"    
+    "name" : "object",
+    "type" : "state",
+    "precision" : 100
   },
   {
     "id" : 3,
-    "name" : "run",
-    "type" : "state"
+    "name" : "tackle",
+    "type" : "phisic",
+    "description" : "Enviste al rival provocando el doble de daño. Tiene 50% de probabilidades de fallar.",
+    "precision" : 50
   }
 ]

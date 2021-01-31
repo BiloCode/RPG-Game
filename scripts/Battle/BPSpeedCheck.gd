@@ -6,7 +6,6 @@ var RanNumber : RandomNumberGenerator;
 
 func _init(RanNumber : RandomNumberGenerator):
 	RanNumber.randomize();
-	self.RanNumber = RanNumber;
 	
 func __invoke(player, enemy):
 	var perform_order = []

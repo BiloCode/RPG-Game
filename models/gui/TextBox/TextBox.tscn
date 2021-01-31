@@ -20,18 +20,18 @@ letter_delay = 0.01
 
 [node name="Box" type="ColorRect" parent="."]
 margin_top = 360.0
-margin_right = 480.0
+margin_right = 600.0
 margin_bottom = 480.0
 color = Color( 0, 0, 0, 0.698039 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Message" type="Label" parent="."]
-margin_left = 29.0
-margin_top = 408.0
-margin_right = 439.0
-margin_bottom = 464.0
+[node name="Message" type="Label" parent="Box"]
+margin_left = 24.0
+margin_top = 48.0
+margin_right = 576.0
+margin_bottom = 104.0
 custom_fonts/font = SubResource( 1 )
 text = "Default text for Testing..."
 autowrap = true
@@ -39,15 +39,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CharacterName" type="Label" parent="."]
+[node name="CharacterName" type="Label" parent="Box"]
+anchor_left = -0.00833333
+anchor_right = 0.538333
 margin_left = 29.0
-margin_top = 376.0
+margin_top = 16.0
 margin_right = 253.0
-margin_bottom = 392.0
+margin_bottom = 32.0
 custom_fonts/font = SubResource( 2 )
 text = "Character Name"
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="MessageTime" type="Timer" parent="."]
