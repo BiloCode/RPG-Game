@@ -20,6 +20,7 @@ enum state_machine {
 
 enum state_battle {
 	LIFE_CHECK,
+	NEXT_ENEMY,
 	CONTROLS,
 	SPEED_CHECK,
 	PERFORM_ACTIONS,

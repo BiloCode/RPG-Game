@@ -1,6 +1,7 @@
 extends "res://scripts/Battle/Battler.gd";
 
 signal onDeath;
+signal onEnemyDamageRecived;
 
 var gold;
 var weapons;
@@ -8,8 +9,14 @@ var items;
 var sprite = "res://assets/sprites/default.png";
 var skills = [0];
 
-func _ready():
-	$Sprite.texture = load(sprite);
+func _process(delta):
+	if isDamageRecived:
+		emit_signal("onEnemyDamageRecived");
+		isDamageRecived = false;
+		
+	if reloadSprite:
+		$Sprite.texture = load(sprite);
+		reloadSprite = false;
 
 func target_selection(target):
 	skill_selected = GameUtility.new().GetSkillById(skills[0]);

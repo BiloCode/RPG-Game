@@ -6,7 +6,7 @@ signal onClick(button);
 
 func _ready():
 	if skill_data != null:
-		$Label.text = skill_data.name;
+		$Label.text = skill_data.display_name;
 
 func _on_SkillButton_pressed():
 	if skill_data != null:

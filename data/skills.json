@@ -2,6 +2,7 @@
   {
     "id" : 0,
     "name" : "atack",
+    "display_name" : "Atacar",
     "type" : "phisic",
     "description" : "Golpea al enemigo con su fuerza fisica",
     "precision" : 100
@@ -9,6 +10,7 @@
   {
     "id" : 1,
     "name" : "defense",
+    "display_name" : "Defender",
     "type" : "state",
     "description" : "El usuario se protege doblando su defensa fisica.",
     "precision" : 100
@@ -16,14 +18,40 @@
   {
     "id" : 2,
     "name" : "object",
+    "display_name" : "Objeto",
     "type" : "state",
     "precision" : 100
   },
   {
     "id" : 3,
     "name" : "tackle",
+    "display_name" : "Carga",
     "type" : "phisic",
     "description" : "Enviste al rival provocando el doble de daño. Tiene 50% de probabilidades de fallar.",
     "precision" : 50
+  },
+  {
+    "id" : 4,
+    "name" : "health",
+    "display_name" : "Revitalia",
+    "type" : "state",
+    "description" : "El usuario ira recuperando el 15% de sus PS durante 8 turnos",
+    "precision" : 100
+  },
+  {
+    "id" : 5,
+    "name" : "posion",
+    "display_name" : "Toxina",
+    "type" : "state",
+    "description" : "Envenena al enemigo. Tiene 50% de probabilidades de fallar.",
+    "precision" : 50 
+  },
+  {
+    "id" : 6,
+    "name" : "body_blow",
+    "display_name" : "Golpe Cuerpo",
+    "type" : "state",
+    "description" : "Golpea al objetivo con mucha fuerza.El usuario recibe daño residual",
+    "precision" : 100 
   }
 ]

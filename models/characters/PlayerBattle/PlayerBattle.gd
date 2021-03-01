@@ -4,6 +4,12 @@ const BattleControls = preload("res://models/gui/BattleControls/BattleControls.t
 
 signal onRunBattle;
 signal onSelectAction;
+signal onPlayerDamageRecived;
+
+func _process(delta):
+	if isDamageRecived:
+		emit_signal("onPlayerDamageRecived");
+		isDamageRecived = false;
 
 # Actions
 func create_controls(target):
@@ -35,12 +41,12 @@ func perform_action():
 	emit_signal("onBattleEntityStartAction", self);
 	animation_controller_create();
 
-# Utilies
+# Utils
 func finalize_controls_action():
 	yield(get_tree().create_timer(0.8), "timeout");
 	emit_signal("onSelectAction");
 
-# Signals Functions
+# Signals For Controls UI
 func _on_atack_select(skill_id):
 	skill_selected = GameUtility.new().GetSkillById(skill_id);
 	finalize_controls_action();

@@ -14,6 +14,6 @@ func __invoke(player, enemy):
 	if player_live && enemy_live:
 		return Types.state_battle.CONTROLS;
 	elif player_live && !enemy_live:
-		return Types.state_battle.WIN_BATTLE;
+		return Types.state_battle.NEXT_ENEMY;
 	else:
 		return Types.state_battle.LOSE_BATTLE;

@@ -29,7 +29,7 @@ func playAnimation(parent, target):
 			AnimationParent.play("AnimationBattlerDefense");
 			yield(AnimationParent, "animation_finished");
 			
-		"object":
+		"object", "health":
 			var animation_cure = Cure.instance();
 			animation_cure.transform = parent.transform;
 			get_tree().root.add_child(animation_cure);

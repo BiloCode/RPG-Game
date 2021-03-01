@@ -6,12 +6,29 @@
     "sprite" : "res://assets/sprites/monsters/slime.png",
     "stats" : {
       "life" : 50,
-      "atack" : 5,
+      "atack" : 4,
       "defense" : 5,
       "speed" : 6
     },
     "treasures" : {
       "gold" : 10,
+      "weapons" : [],
+      "items" : []
+    }
+  },
+  {
+    "id" : 1,
+    "name" : "Goblin",
+    "battle_zone" : 0,
+    "sprite" : "res://assets/sprites/monsters/goblin.png",
+    "stats" : {
+      "life" : 80,
+      "atack" : 5,
+      "defense" : 4,
+      "speed" : 6
+    },
+    "treasures" : {
+      "gold" : 30,
       "weapons" : [],
       "items" : []
     }

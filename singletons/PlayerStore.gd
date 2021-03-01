@@ -5,7 +5,7 @@ var player_name = "Luxvir";
 var gold = 0;
 var position = Vector2();
 
-var skills = [0,1,3];
+var skills = [0,1,3,4,5];
 var inventory = [
 	{
 		"id" : 1,
@@ -31,8 +31,8 @@ var inventory = [
 var stats_points = 0;
 var stats = {
 	"life" : 40,
-	"atack" : 10,
-	"defense" : 3,
+	"atack" : 8,
+	"defense" : 5,
 	"speed" : 9
 }
 

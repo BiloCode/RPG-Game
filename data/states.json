@@ -1,0 +1,12 @@
+[
+  {
+    "id" : 0,
+    "name" : "posioned",
+    "turn_duration" : -1
+  },
+  {
+    "id" : 1,
+    "name" : "healing",
+    "turn_duration" : 8
+  }
+]

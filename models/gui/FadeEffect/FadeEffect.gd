@@ -3,9 +3,6 @@ extends CanvasLayer
 signal onFadeInEnd;
 signal onFadeOutEnd;
 
-func _ready():
-	$Animation.play("FadeIn");
-
 func _on_Animation_animation_finished(anim_name):
 	match anim_name:
 		"FadeIn":
